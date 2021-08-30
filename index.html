@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>放大镜效果</title>
+</head>
+<body>
+  <div id="imgGlass"></div>
+  <script src="./dist/glassImg.min.js"></script>
+  <script>
+    window.onload = function () {
+      new GlassImg({
+        id: 'imgGlass',
+        width: 400,
+        height: 400,
+        img: './pic.jpg'
+      })
+    }
+  </script>
+</body>
+</html>
