@@ -8,12 +8,13 @@ export default class GlassImg {
   boxEle: HTMLElement;
   handEle: HTMLElement;
   bigImgEle: HTMLElement;
-  imgEle: HTMLElement;
+  imgEle: HTMLImageElement;
   $imgWidth: number;
   $imgHeight: number;
   $scaleX: number;
   $scaleY: number;
-
+  $boxWidth: number;
+  $boxHeight: number;
   constructor(opts: OptsType) {
     this.init(opts);
   }
@@ -25,22 +26,25 @@ export default class GlassImg {
     const bigImgEle = document.createElement('div');
     const imgEle = document.createElement('img');
     
+    this.$boxWidth = opts.width;
+    this.$boxHeight = opts.height;
     imgEle.src = opts.img;
     imgEle.style.position = 'absolute';
     imgEle.style.top = 0 + 'px';
     imgEle.style.left = 0 + 'px';
     imgEle.onload = () => {
-      that.$imgWidth = imgEle.width;
-      that.$imgHeight = imgEle.height;
-      that.$scaleX = opts.width/imgEle.width;
-      that.$scaleY = opts.height/imgEle.height;
+      that.imgLoad(imgEle, handEle);
+      // that.$imgWidth = imgEle.width;
+      // that.$imgHeight = imgEle.height;
+      // that.$scaleX = opts.width/imgEle.width;
+      // that.$scaleY = opts.height/imgEle.height;
 
-      handEle.style.width = opts.width * that.$scaleX + 'px';
-      handEle.style.height = opts.height * that.$scaleY  + 'px';
-      handEle.style.position = 'absolute';
-      handEle.style.background = 'blue';
-      handEle.style.opacity = '0.4';
-      handEle.style.display = 'none';
+      // handEle.style.width = opts.width * that.$scaleX + 'px';
+      // handEle.style.height = opts.height * that.$scaleY  + 'px';
+      // handEle.style.position = 'absolute';
+      // handEle.style.background = 'blue';
+      // handEle.style.opacity = '0.4';
+      // handEle.style.display = 'none';
     };
     
     boxEle.style.width = opts.width + 'px';
@@ -55,7 +59,7 @@ export default class GlassImg {
     bigImgEle.style.position = 'absolute';
     bigImgEle.style.overflow = 'hidden';
     bigImgEle.style.left = boxEle.offsetLeft + opts.width + 'px';
-    bigImgEle.style.top = boxEle.offsetTop + 'px';
+    bigImgEle.style.top = 0 + 'px';
     bigImgEle.style.display = 'none';
 
     boxEle.appendChild(handEle);
@@ -78,7 +82,6 @@ export default class GlassImg {
       this.over();
     }
     this.boxEle.onmouseleave = () => {
-      console.log('levet');
       this.leave();
     }
     this.boxEle.onmousemove = (event) => {
@@ -108,7 +111,28 @@ export default class GlassImg {
     };
     this.handEle.style.left = l + 'px';
     this.handEle.style.top = t + 'px';
+    this.imgEle.style.left = -l/this.$scaleX + 'px';
+    this.imgEle.style.top = -t/this.$scaleY + 'px';
+  }
+  changeImg(path) {
+    const that = this;
+    (this.imgEle as HTMLImageElement).src = path;
+    this.boxEle.style.backgroundImage = `url(${path})`;
+    this.imgEle.onload = () => {
+      that.imgLoad(that.imgEle, that.handEle);
+    }
+  }
+  imgLoad(imgEle, handEle) {
+    this.$imgWidth = imgEle.width;
+    this.$imgHeight = imgEle.height;
+    this.$scaleX = this.$boxWidth/imgEle.width;
+    this.$scaleY = this.$boxHeight/imgEle.height;
 
-
+    handEle.style.width = this.$boxWidth * this.$scaleX + 'px';
+    handEle.style.height = this.$boxHeight * this.$scaleY  + 'px';
+    handEle.style.position = 'absolute';
+    handEle.style.background = 'blue';
+    handEle.style.opacity = '0.4';
+    handEle.style.display = 'none';
   }
 }

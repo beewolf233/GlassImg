@@ -11,12 +11,13 @@
   <script src="./dist/glassImg.min.js"></script>
   <script>
     window.onload = function () {
-      new GlassImg({
+      const imgbox = new GlassImg({
         id: 'imgGlass',
         width: 400,
         height: 400,
         img: './pic.jpg'
-      })
+      });
+      imgbox.changeImg('./pic2.jpg');
     }
   </script>
 </body>
