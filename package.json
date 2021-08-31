@@ -1,9 +1,10 @@
 {
   "name": "glassbig",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "publish": "rollup -c ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
     "watch": "rollup -cw",
