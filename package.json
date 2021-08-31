@@ -9,7 +9,7 @@
     "watch": "rollup -cw",
     "clean": "rm -rf node_modules"
   },
-  "author": "",
+  "author": "bee",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.15.0",

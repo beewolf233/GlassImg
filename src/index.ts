@@ -16,7 +16,11 @@ export default class GlassImg {
   $boxWidth: number;
   $boxHeight: number;
   constructor(opts: OptsType) {
-    this.init(opts);
+    this.init({
+      width: '400px',
+      height: '400px',
+      ...opts
+    });
   }
   // 初始化方法
   init(opts) {
